@@ -3,6 +3,9 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestClassifier
 
 url = 'weatherAUS.csv'
 data2 = pd.read_csv(url)
@@ -74,6 +77,70 @@ print(f'accuracy de Test de Entrenamiento: {svc.score(x_test, y_test)}')
 
 # Accuracy de Validación
 print(f'accuracy de Validación: {svc.score(x_test_out, y_test_out)}')
+
+# ARBOL DE DECISIÓN
+
+# Seleccionar un modelo
+arbol = DecisionTreeClassifier()
+
+# Entreno el modelo
+arbol.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Decisión Tree')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {arbol.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {arbol.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {arbol.score(x_test_out, y_test_out)}')
+
+#REGRESION LINEAL
+
+#seleccionar un modelo
+rl = LinearRegression()
+
+#entreamo el modelo
+rl.fit(x_train, y_train)
+
+# MÉTRICAS
+print('*'*50)
+print('Regresion Lineal')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {rl.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {rl.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {rl.score(x_test_out, y_test_out)}')
+
+#RANDOM FOREST
+
+#seleccionar un modelo
+rf = RandomForestClassifier()
+
+#entreamo el modelo
+rf.fit(x_train, y_train)
+
+# MÉTRICAS
+print('*'*50)
+print('Random Forest')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {rf.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {rf.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {rf.score(x_test_out, y_test_out)}')
 
 
 
