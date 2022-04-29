@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
 
 url = 'diabetes.csv'
 data1 = pd.read_csv(url)
@@ -44,6 +45,29 @@ print(f'accuracy de Test de Entrenamiento: {logreg.score(x_test, y_test)}')
 
 # Accuracy de Validación
 print(f'accuracy de Validación: {logreg.score(x_test_out, y_test_out)}')
+
+# MAQUINA DE SOPORTE VECTORIAL
+
+# Seleccionar un modelo
+svc = SVC(gamma='auto')
+
+# Entreno el modelo
+svc.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Maquina de soporte vectorial')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {svc.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {svc.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {svc.score(x_test_out, y_test_out)}')
+
 
 
  
