@@ -22,4 +22,8 @@ data.job.replace(['admin', 'unknown', 'unemployed', 'management', 'housemaid', '
 data.loan.replace(['no', 'yes'], [0, 1], inplace=True)
 data.default.replace(['no', 'yes'], [0, 1], inplace=True)
 data.y.replace(['no', 'yes'], [0, 1], inplace=True)
+data.housing.replace(['no', 'yes'], [0, 1], inplace=True)
 
+#dividimos los datos en dos
+data_train = data[:22605]
+data_test = data[22605:]
