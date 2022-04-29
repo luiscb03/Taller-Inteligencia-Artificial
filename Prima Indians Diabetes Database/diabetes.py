@@ -135,5 +135,31 @@ print(f'accuracy de Test de Entrenamiento: {rf.score(x_test, y_test)}')
 # Accuracy de Validación
 print(f'accuracy de Validación: {rf.score(x_test_out, y_test_out)}')
 
+-------------------------- RESULTADOS ----------------------------------------
+
+- Regresión Logística
+accuracy de Entrenamiento de Entrenamiento: 0.7687296416938111
+accuracy de Test de Entrenamiento: 0.7012987012987013
+accuracy de Validación: 0.7942708333333334
+**************************************************
+- Maquina de soporte vectorial
+accuracy de Entrenamiento de Entrenamiento: 0.9869706840390879
+accuracy de Test de Entrenamiento: 0.6883116883116883
+accuracy de Validación: 0.6953125
+**************************************************
+- Decisión Tree
+accuracy de Entrenamiento de Entrenamiento: 1.0
+accuracy de Test de Entrenamiento: 0.6753246753246753
+accuracy de Validación: 0.6640625
+**************************************************
+- Regresion Lineal
+accuracy de Entrenamiento de Entrenamiento: 0.30897688754473207
+accuracy de Test de Entrenamiento: 0.07917379097397892
+accuracy de Validación: 0.2854578845401293
+**************************************************
+- Random Forest
+accuracy de Entrenamiento de Entrenamiento: 1.0
+accuracy de Test de Entrenamiento: 0.7272727272727273
+accuracy de Validación: 0.765625
 
  
