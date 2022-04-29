@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 url = 'diabetes.csv'
 data1 = pd.read_csv(url)
@@ -11,5 +13,37 @@ data1.Age = pd.cut(data1.Age, rangos, labels=nombres)
 #dividimos los datos en dos
 data1_train = data1[:384]
 data1_test = data1[384:]
+
+x = np.array(data1_train.drop(['Outcome'], 1))
+y = np.array(data1_train.Outcome) 
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+
+x_test_out = np.array(data1_test.drop(['Outcome'], 1))
+y_test_out = np.array(data1_test.Outcome) # 0 no acepto, 1 si acepto
+# Regresión Logística
+
+
+# Seleccionar un modelo
+logreg = LogisticRegression(solver='lbfgs', max_iter = 7600)
+
+# Entreno el modelo
+logreg.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Regresión Logística')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {logreg.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {logreg.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {logreg.score(x_test_out, y_test_out)}')
+
 
  

@@ -1,5 +1,7 @@
 import pandas as pd
 import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
 
 url = 'weatherAUS.csv'
 data2 = pd.read_csv(url)
@@ -9,10 +11,45 @@ data2.drop(['Location', 'MinTemp', 'MaxTemp', 'WindSpeed9am', 'WindSpeed3pm'], a
 
 data2.RainTomorrow.replace(['No', 'Yes'], [0, 1], inplace=True)
 data2.RainToday.replace(['No', 'Yes'], [0, 1], inplace=True)
-data2.WindGustDir.replace(['no', 'yes'], [0, 1], inplace=True)
+#data2.WindGustDir.replace(['no', 'yes'], [0, 1], inplace=True)
+data2.WindGustDir.replace(['W', 'WNW', 'WSW', 'NE', 'E', 'NNW', 'N', 'SE', 'NNE', 'ENE', 'SSE', 'SW', 'SSW', 'ESE', 'NW', 'S'], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], inplace=True)
+data2.WindDir9am.replace(['W', 'WNW', 'WSW', 'NE', 'E', 'NNW', 'N', 'SE', 'NNE', 'ENE', 'SSE', 'SW', 'SSW', 'ESE', 'NW', 'S'], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], inplace=True)
+data2.WindDir3pm.replace(['W', 'WNW', 'WSW', 'NE', 'E', 'NNW', 'N', 'SE', 'NNE', 'ENE', 'SSE', 'SW', 'SSW', 'ESE', 'NW', 'S'], [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], inplace=True)
+data2.dropna(axis=0,how='any', inplace=True)
 
 #dividimos los datos en dos
 data2_train = data2[:71096]
 data2_test = data2[71096:]
+
+x = np.array(data2_train.drop(['RainTomorrow'], 1))
+y = np.array(data2_train.RainTomorrow) 
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+
+
+x_test_out = np.array(data2_test.drop(['RainTomorrow'], 1))
+y_test_out = np.array(data2_test.RainTomorrow) # 0 no acepto, 1 si acepto
+# Regresión Logística
+
+
+# Seleccionar un modelo
+logreg = LogisticRegression(solver='lbfgs', max_iter = 7600)
+
+# Entreno el modelo
+logreg.fit(x_train, y_train)
+
+# MÉTRICAS
+
+print('*'*50)
+print('Regresión Logística')
+
+# Accuracy de Entrenamiento de Entrenamiento
+print(f'accuracy de Entrenamiento de Entrenamiento: {logreg.score(x_train, y_train)}')
+
+# Accuracy de Test de Entrenamiento
+print(f'accuracy de Test de Entrenamiento: {logreg.score(x_test, y_test)}')
+
+# Accuracy de Validación
+print(f'accuracy de Validación: {logreg.score(x_test_out, y_test_out)}')
 
 
